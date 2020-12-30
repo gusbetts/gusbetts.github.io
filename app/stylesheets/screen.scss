@@ -1,0 +1,82 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base";
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint";
+ 
+@import "compass";
+
+@include blueprint-typography;
+@include blueprint-interaction;
+
+body {
+  background: url(/images/bg.png) repeat;
+}
+
+textarea {
+  font-family: $blueprint-font-family;
+}
+
+.clearfix {
+  @include clearfix;
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+h1, h2, h3, h4 {
+  @include text-shadow(1px 1px rgba(0, 0, 0, 0.2));
+  font-family: 'Permanent Marker', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+.newsec {
+  margin-top: 1.5em;
+}
+
+label {
+  font-weight: bold;
+}
+
+#wrap {
+  background: #fffcf6;
+  width: 740px;
+
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+
+  @include box-shadow(0 1px 6px 0 rgba(0, 0, 0, 0.2));
+  /*border-radius: 5px;*/
+}
+body.standalone #wrap {
+  margin: 0 auto;
+  padding: 10px 30px 30px 30px;
+  border: 0 1px 1px 1px solid #ccc;
+}
+
+.left-col {
+  width: 480px;
+  margin-right: 10px;
+  float: left;
+}
+.right-col {
+  width: 250px;
+  float: left;
+}
+
+.framed {
+  @include box-shadow(0px 0px 5px rgba(0,0,0,0.8));
+  border: 1px solid #999;
+}
+
+@import "game-list";
+@import "game-play";
+@import "buttons";
+@import "tooltips";
+

@@ -1,0 +1,15 @@
+.clearfix
+  .left-col
+    %h2.title Anagram Thief!
+    %h3.tagline a David Liu production, revitalized by Jon Gottfried
+  .right-col
+    .clearfix
+      = image_tag current_user.profile_pic,            |
+        :width => 50, :height => 50, :class => 'right' |
+      Welcome,
+      = succeed "!" do
+        %strong= current_user.name
+    %p
+      %a{:href => sessions_logout_url} Logout
+    = yield :header_area
+%hr/

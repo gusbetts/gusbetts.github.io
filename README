@@ -1,0 +1,11 @@
+This is the code for [Anagram Thief](http://dcliu.com/projects/anagram-thief/), which is a real-time multiplayer word game in which you race to build words from letter tiles, and you can steal your opponents’ words by rearranging and adding letters.
+
+Updated to run on Rails 4
+
+First time you run it:
+move .env.sample to .env and fill in vars
+docker-compose run web bundle exec rake db:create
+docker-compose run web bundle exec rake db:migrate
+
+To start:
+docker-compose up --build -d

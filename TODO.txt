@@ -1,0 +1,138 @@
+Jon Ideas for anagrams
+  Set letter pool quantity and minimum # of letters per word
+  Order of flippers /round robin or rate limiting or autoflip
+  Private rooms
+  Devise/Omniauth
+  Leaderboard
+  Say who word was stolen from
+  Fix wordnik bug w/ bad definitions
+  speech to text
+  show root word in definition
+  fix how root words are determined
+  why is dictionary dying after a while?
+
+
+
+RAILS DECOUPLING
+/ Show player names
+/ Record user win/loss stats
+/ Facebook publish prompt
+  When missing player is in the rank data, template fails to render.
+
+ROBOTS
+/ Add bot with diff levels
+/ Remove bot
+/ Limit bots
+  Error message for robots limited
+  Shut down when all humans leave
+
+
+APPSERVER TRANSITION
+/ Put definition requests on a helper fiber so as not to block gameplay.
+/ Last Activity, People playing here.
+  Semantics of ending old games
+
+
+ENHANCEMENTS 2
+  Tutorial video
+  Space out /play header buttons
+  Tutorial/finish smart tooltips.
+  Make invite links work after signing in.
+  Better "disabled" claim field/letter pool  appearance.
+
+/ Factor out header.
+/ Welcome, User! header on game page.
+/ Fix oversized Connect w Facebook button for guests in header
+/ Space out sidebar on /games/list
+/ Graphical misalignment of floats in game over dialog.
+/ Don't offer to post to FB with guests; instead, ask them to log in and tell them why.
+
+/ body class="game-over" kills "fbframe" class
+
+ENHANCEMENTS
+/ Landing page for non-signed-in users
+  In-room score
+
+~ Game stats: # letters stolen, # words made, longest steal
+  Sound effects
+  Achievements
+    Games Completed
+      Lone Wolf - complete game entirely on own
+    Making Long Words
+    Making Words
+      Wordsmith
+      Word Lord
+    Stealing
+      Petty Thief
+      Pickpocket
+      Shoplifter
+      Burglar
+      Grand Theft Alphabet
+      Heist Master
+    Taking the last word
+/ Flip rate limiting
+  Private rooms
+/ Guest mode
+  Round table simulation for matching fairness
+  Show unmatched words at endgame
+  Bookmark words for study
+
+PROBABLY NOT
+  See people in lobby
+  Finish making FB request invitations work - list on index page, link to game rooms
+  Turn taking 5x at a time - with vote to skip turn
+
+PERFORMANCE/CLEANUP
+  Need to refactor GameState again, and possibly the controllers
+    Consider the concerned_with plugin
+  Heartbeats on separate redis keys
+  Fix GameState.saved?, only save if needed
+  Consolidate redis connections
+  All Firefoxes - websockets don't work
+  
+TESTING
+  Test Many Browsers
+
+  Josh
+  Safari 5.0.2 Mac
+  Firefox
+  Chrome 8 Mac - press enter in text fields doesn't work
+
+
+OLD/DONE
+/ Last activity in a game - in lobby
+/ Allow Vscrollbar
+/ Move "A David Liu Production"
+/ Make "Flip" bigger
+/ Clicking inside the message box should focus chat
+/ Detect game finish
+/   Vote that you're "done"
+/     Per-person score: number of games won
+/     Publish game results
+/   Detect "old" rooms with people who left
+/     Count their scores
+/ Flood protection for chat and claim field
+/ Instructions / How Do I Play? in top leftcol
+/ Fix race condition on purging empty games
+/ Remove people from the last game after they close out
+/ Remove game_id from inactive users
+/ Purge empty rooms
+
+/ GameState locking
+/ What happens if crashed? Lock released?
+
+/ Dictionary : No def found, "try dictionary.com" link
+/ Dictionary - auto define
+/ Root detect
+    Crowdsource
+
+/ Refactor GameState to be OO
+/ - Needs Serialize / load!
+  
+/ Players gone or idle - heartbeat.
+X   Need async timer?
+
+/ Match Algorithm needs to be reworked
+x   Score different possibilities
+/   Backtracking
+/ Highlight words that are taken

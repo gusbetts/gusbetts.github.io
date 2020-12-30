@@ -1,0 +1,87 @@
+/* http://webdesignerwall.com/tutorials/css3-gradient-buttons */
+.button {
+  display: inline-block;
+  zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+  *display: inline;
+  vertical-align: baseline;
+  margin: 0 2px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font: 14px;
+  padding: .5em 2em .55em;
+  text-shadow: 0 1px 1px rgba(0,0,0,.3);
+  @include border-radius(.5em);
+  @include box-shadow(0 1px 2px rgba(0,0,0,.2));
+
+  &:hover:not([disabled]) {
+    text-decoration: none;
+  }
+  &:active:not([disabled]) {
+    position: relative;
+    top: 1px;
+  }
+
+  &.bigrounded {
+    @include border-radius(2em);
+  }
+  &.medium {
+    font-size: 12px;
+    padding: .4em 1.5em .42em;
+  }
+  &.small {
+    font-size: 11px;
+    padding: .2em 1em .275em;
+  }
+
+  &.black {
+    color: #fff;
+    border: solid 1px #333;
+    background: #333;
+    @include background-image(linear-gradient(#666, #000));
+  }
+  &.black:hover:not([disabled]) {
+    background: #000;
+    @include background-image(linear-gradient(#444, #000));
+  }
+  &.black:active:not([disabled]) {
+    color: #999;
+    @include background-image(linear-gradient(#000, #444));
+  }
+  &.black[disabled] {
+    background: #888;
+  }
+
+  /* gray */
+  &.gray {
+    color: #e9e9e9;
+    border: solid 1px #555;
+    background: #6e6e6e;
+    @include background-image(linear-gradient(#888, #575757));
+  }
+  &.gray:hover {
+    background: #616161;
+    @include background-image(linear-gradient(#757575, #4b4b4b));
+  }
+  &.gray:active {
+    color: #afafaf;
+    @include background-image(linear-gradient(#575757, #888));
+  }
+
+  /* white */
+  &.white {
+    color: #606060;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    @include background-image(linear-gradient(#fff, #ededed));
+  }
+  &.white:hover {
+    background: #ededed;
+    @include background-image(linear-gradient(#fff, #dcdcdc));
+  }
+  &.white:active {
+    color: #999;
+    @include background-image(linear-gradient(#ededed, #fff));
+  }
+}

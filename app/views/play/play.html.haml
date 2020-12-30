@@ -1,0 +1,124 @@
+- content_for :header_area do
+  %span.sectionhead
+    Game Room: #{@game.name}.
+  %br/
+  = link_to 'Back to Lobby', games_list_url, :class => "button white medium"
+  %br/
+  %a#show-instructions-link.button.white.medium{:href => "#"}
+    %strong Instructions
+  %a#hide-instructions-link.button.white.medium{:href => "#", :style => "display:none"}
+    %strong Hide Instructions
+  %br/
+  %a#show-invites-link.button.white.medium{:href => "#"} Invite friends
+  %a#hide-invites-link.button.white.medium{:href => "#", :style => "display:none"} Hide invitations
+
+= render :partial => 'shared/header'
+
+#instructions-section.clearfix{:style => "display:none"}
+  #instructions-text
+    %h4 Instructions
+    %ul
+      %li
+        %strong Goal:
+        Gather letters by making words from anagrams.
+      %li We start with letter tiles face down. Flip the tiles together with the other players.
+      %li If you see a word you can make with these letters, claim it by typing it in the "Claim a word" text box.
+      %li
+        Steal existing words by making them longer and changing the root. You could steal
+        %strong AGO
+        and add an
+        %strong L
+        to make
+        = succeed "." do
+          %strong GOAL
+        But you can't steal
+        %strong GOAL
+        and make it
+        = succeed "." do
+          %strong GOALS
+      %li Chat with your opponents in the right-side column. You can also invite your friends to join this game room directly, with the "Invite" link in the top-right.
+      %li
+        %strong Tip:
+        When your claim textbox is empty, just press Enter to flip a tile.
+  %hr/
+
+#invites-section.clearfix{:style => "display:none"}
+  %h4 Direct Link
+  %p
+    Copy and paste this URL to your friends, and it will bring them directly to this game room:
+    %br/
+    (Mouse-over and hit CTRL-C / Command-C)
+    
+  %a#close-invites-link{:href => "#", :style => "display:none"}
+  %hr/
+
+
+.clearfix
+  .left-col
+    .when-game-over.notice
+      %p.large
+        The game is over.
+        %input#restart-btn.conn-ui.button.black{:type => "button", :value => "Restart Game"}/
+      #game-over-area
+    .game
+      #pool
+        %div
+          .clearfix
+            %h3.left Letter Pool
+            %input#flip-btn.conn-ui.play-ui.button.black{:type => "button", :value => "Flip a letter!"}/
+            %input#vote-done-btn.conn-ui.button.black{:type => "button", :value => "Vote to End Game"}/
+            %input#cancel-vote-btn.conn-ui.button.black{:style => "display:none", :type => "button", :value => "Cancel Vote"}/
+          #pool-area
+      #player-area
+      #create-robot-area
+        %span.sectionhead No one to play with?
+        Create a robot.
+        %br/
+        %select#robot-level
+          - @robot_titles.each_with_index do |title, level|
+            %option{:value => level} Level #{level}: #{title}
+        %input#bot-btn.conn-ui.button.black{:type => "button", :value => "Create"}/
+    %hr/
+    %div
+      %input#refresh-btn.conn-ui.button.black{:type => "button", :value => "Refresh"}/
+
+  .right-col
+    .game
+      %label.sectionhead{:for => "claimword"} Claim a word:
+      %br/
+      %input#claimword.conn-ui.play-ui{:type => "text"}
+      %input#claim-btn.conn-ui.play-ui{:type => "button", :value => "Claim"}
+      %br/
+      or just press enter to flip a new letter.
+    %hr/
+    .sectionhead Messages
+    #message-area
+      %ul#messages
+        %li Welcome to Anagram Thief.
+    %textarea#chat.conn-ui{:placeholder => "Type here and press enter to chat\u2026"}
+    #defn-nav
+      %span.sectionhead Definitions
+      .right
+        %a#prev-defn{:href => "#"} &laquo; Prev
+        |
+        %a#next-defn{:href => "#"} Next &raquo;
+    #definition
+
+
+- content_for :after_scripts do
+  :javascript
+    $(document).ready(function() {
+      Anathief.init({
+        sio: '#{raw Anathief::AppServer::SIOWS_URL}',
+        userId: '#{raw @me_id}',
+        gameId: '#{raw @game_id}',
+        idToken: '#{raw @id_token}',
+        urls: {
+          addBot: '#{raw bots_add_url}',
+          removeBot: '#{raw bots_remove_url}',
+          listBots: '#{raw bots_list_url}',
+          changeBot: '#{raw bots_change_url}',
+        },
+        isGuest: #{current_user.guest? ? 'true' : 'false'},
+      });
+    });

@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %title Anagram Thief!
+    %link{:href => "http://fonts.googleapis.com/css?family=Permanent+Marker", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Nobile", :rel => "stylesheet", :type => "text/css"}/
+    = include_stylesheets :screen, :media => 'screen, projection'
+    = include_stylesheets :print, :media => 'print'
+    /[if IE] <haml:loud> include_stylesheets :ie, :media => 'screen, projection' </haml:loud>
+    = csrf_meta_tag
+    %meta{:content => "CP=\"NON CURa ADMa DEVa TAIa OUR BUS IND PHY UNI COM NAV DEM\"", :href => public_file_url('privacy.p3p'), "http-equiv" => "P3P"}/
+    %script{:async => true, :src => "https://www.googletagmanager.com/gtag/js?id=#{raw Anathief::GA_ID}"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+      
+          gtag('config', "#{raw Anathief::GA_ID}");
+  
+  %body{:onload => "Anathief.setSize();"}
+  
+    #wrap
+      = yield
+
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"
+    = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
+    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.dev.js"
+
+    = include_javascripts :application
+    = include_javascripts :templates
+    = yield :after_scripts

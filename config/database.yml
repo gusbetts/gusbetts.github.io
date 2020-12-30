@@ -1,0 +1,26 @@
+
+default: &default
+   adapter: postgresql
+   encoding: unicode
+   host: db
+   username: postgres
+   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+   timeout: 5000
+
+development:
+  <<: *default
+  database: anagramthief_dev
+  host: localhost
+  username: jonmarkgo
+
+test:
+  <<: *default
+  database: anagramthief_test
+
+production:
+   adapter: postgresql
+   encoding: unicode
+   host: db
+   username: postgres
+   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+   timeout: 5000
